@@ -4,4 +4,4 @@ USER root
 RUN mkdir /code
 RUN chown -R odoo /code
 USER odoo
-ADD ./enterprise /code/enterprise
+ADD ./code/enterprise /code/enterprise
