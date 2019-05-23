@@ -1,2 +1,2 @@
 FROM nanoramic/odoo-enterprise
-ADD ./code/custom /code/custom
+ADD ./custom /code/custom
