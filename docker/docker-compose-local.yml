@@ -1,0 +1,26 @@
+version: '2'
+services:
+  odoo:
+    build:
+      context: ../code
+      dockerfile: ../docker/Dockerfile.dev
+    command: odoo
+    ports:
+      - "8069:8069"
+    depends_on:
+      - db      
+    environment:
+      - DB_USER=odoo
+      - DB_PASS=odoo
+      - DB_NAME=odoodb      
+    volumes:
+      - ../code:/code
+  db:
+    image: postgres:10.5
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+       

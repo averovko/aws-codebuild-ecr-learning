@@ -1,0 +1,22 @@
+version: '2'
+services:
+  odoo:
+    image: nanoramic/odoo-production
+    command: odoo
+    ports:
+      - "8069:8069"
+    depends_on:
+      - db      
+    environment:
+      - DB_USER=odoo
+      - DB_PASS=odoo
+      - DB_NAME=odoodb
+  db:
+    image: postgres:10.5
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+       
