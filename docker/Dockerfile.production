@@ -1,2 +1,2 @@
-FROM nanoramic/odoo-enterprise
+FROM $IMAGE
 ADD ./custom /code/custom
