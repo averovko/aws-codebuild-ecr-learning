@@ -19,10 +19,10 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build --build-arg IMAGE=$REPOSITORY_URI:enterprise -t $REPOSITORY_URI:$IMAGE_TAG -f docker/Dockerfile.production ./code
-      - docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG-$CODEBUILD_GIT_BRANCH-$COMMIT_HASH
+      - docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG-$CODEBUILD_GIT_CLEAN_BRANCH-$COMMIT_HASH
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - docker push $REPOSITORY_URI:$IMAGE_TAG-$CODEBUILD_GIT_BRANCH-$COMMIT_HASH
+      - docker push $REPOSITORY_URI:$IMAGE_TAG-$CODEBUILD_GIT_CLEAN_BRANCH-$COMMIT_HASH
