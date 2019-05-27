@@ -8,8 +8,6 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - AWS_ACCOUNT_ID=205791896111
-      - IMAGE_REPO_NAME=nanoramic
       - IMAGE_TAG=base
   build:
     commands:
