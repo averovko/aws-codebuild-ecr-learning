@@ -1,5 +1,6 @@
-ARG IMAGE=nanoramic/odoo-base
-FROM $IMAGE
+#ARG IMAGE=nanoramic/odoo-base
+#FROM $IMAGE
+FROM 205791896111.dkr.ecr.us-east-1.amazonaws.com/nanoramic:base
 
 USER root
 RUN mkdir /code
