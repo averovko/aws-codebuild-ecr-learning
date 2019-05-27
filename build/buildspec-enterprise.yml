@@ -11,8 +11,6 @@ phases:
       - AWS_ACCOUNT_ID=205791896111
       - IMAGE_REPO_NAME=nanoramic
       - IMAGE_TAG=enterprise
-      - export IMAGE=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:base
-      - echo $IMAGE
   build:
     commands:
       - echo Build started on `date`
@@ -20,8 +18,8 @@ phases:
       #- aws ecr describe-repositories
       #- aws ecr describe-images --repository-name nanoramic
       #- docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:base
-      - docker build -t $IMAGE_REPO_NAME/enterprise:$IMAGE_TAG -f docker/Dockerfile.enterprise ./code
-      - docker tag $IMAGE_REPO_NAME/enterprise:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker build --build-arg IMAGE=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:base -t $IMAGE_REPO_NAME:$IMAGE_TAG -f docker/Dockerfile.enterprise ./code
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
