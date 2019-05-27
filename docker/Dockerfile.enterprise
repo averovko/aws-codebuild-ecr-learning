@@ -1,4 +1,5 @@
-FROM nanoramic/odoo-base
+ARG IMAGE=nanoramic/odoo-base
+FROM ${IMAGE}
 
 USER root
 RUN mkdir /code

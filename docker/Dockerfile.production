@@ -1,2 +1,3 @@
-FROM $IMAGE
+ARG IMAGE=nanoramic/odoo-enterprise
+FROM ${IMAGE}
 ADD ./custom /code/custom
