@@ -1,5 +1,5 @@
 ARG IMAGE=nanoramic/odoo-base
-FROM ${IMAGE}
+FROM $IMAGE
 
 USER root
 RUN mkdir /code
