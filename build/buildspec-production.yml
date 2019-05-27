@@ -10,12 +10,12 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - AWS_ACCOUNT_ID=205791896111
       - IMAGE_REPO_NAME=nanoramic
-      - IMAGE_TAG=enterprise
+      - IMAGE_TAG=production
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build --build-arg IMAGE=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:base -t $IMAGE_REPO_NAME:$IMAGE_TAG -f docker/Dockerfile.enterprise ./code
+      - docker build --build-arg IMAGE=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:enterprise -t $IMAGE_REPO_NAME:$IMAGE_TAG -f docker/Dockerfile.production ./code
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
