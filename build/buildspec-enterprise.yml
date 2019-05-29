@@ -10,7 +10,7 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
-      - git config --global credential.helper store
+      - git config --global credential.helper store --file=/root/.git-credentials
       - printf "https://$GITHUB_TOKEN:x-oauth-basic@github.com\n" >> /root/.git-credentials
       - git config --global user.email "builder@agilevision.io"
       - git config --global user.name "AWS CICD"
@@ -19,7 +19,6 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - git init
       - git submodule update --init --recursive
       - docker build --build-arg IMAGE=$REPOSITORY_URI:base -t $REPOSITORY_URI:$IMAGE_TAG -f docker/Dockerfile.enterprise ./code
       - docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG-$COMMIT_HASH
