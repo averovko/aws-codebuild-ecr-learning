@@ -1,0 +1,3 @@
+[submodule "code/enterprise"]
+	path = code/enterprise
+	url = git@github.com:odoo/enterprise.git
