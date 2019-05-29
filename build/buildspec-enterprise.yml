@@ -10,10 +10,8 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
-      - git config --global credential.helper store --file=/root/.git-credentials
+      - git config credential.helper store --file=/root/.git-credentials
       - printf "https://$GITHUB_TOKEN:x-oauth-basic@github.com\n" >> /root/.git-credentials
-      - git config --global user.email "builder@agilevision.io"
-      - git config --global user.name "AWS CICD"
       - cat /root/.git-credentials
   build:
     commands:
