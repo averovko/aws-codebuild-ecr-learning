@@ -14,6 +14,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - git submodule update --init --recursive
       - docker build --build-arg IMAGE=$REPOSITORY_URI:base -t $REPOSITORY_URI:$IMAGE_TAG -f docker/Dockerfile.enterprise ./code
       - docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG-$COMMIT_HASH
   post_build:
